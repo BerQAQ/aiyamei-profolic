@@ -12,15 +12,14 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vue-vendor': ['vue', 'vue-router'],
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor'
+          }
         },
       },
     },
     chunkSizeWarningLimit: 500,
-    target: 'es2020',
-    cssMinify: true,
-    minify: 'esbuild',
   },
   server: {
     open: false,
