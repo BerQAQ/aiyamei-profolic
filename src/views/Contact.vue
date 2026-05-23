@@ -37,9 +37,11 @@
             <textarea v-model="form.msg" rows="5" placeholder="请描述您的需求或合作意向..." required
               class="w-full p-3 rounded-lg bg-purple/5 border border-purple/15 text-white placeholder-white/20 focus:border-orange focus:ring-1 focus:ring-orange/20 outline-none transition-all duration-200 text-sm resize-none" />
           </div>
-          <button type="submit"
-            class="w-full px-6 py-3 bg-orange text-dark font-semibold rounded-lg hover:bg-orange/90 hover:shadow-lg hover:shadow-orange/15 transition-all duration-200 active:scale-[0.98] text-sm">
-            发送信息
+          <button type="submit" :disabled="sending"
+            class="w-full px-6 py-3 bg-orange text-dark font-semibold rounded-lg hover:bg-orange/90 hover:shadow-lg hover:shadow-orange/15 transition-all duration-200 active:scale-[0.98] text-sm disabled:opacity-50 disabled:cursor-not-allowed">
+            <span v-if="sending">发送中...</span>
+            <span v-else-if="sent">✅ 已发送</span>
+            <span v-else>发送信息</span>
           </button>
         </form>
       </div>
@@ -82,7 +84,9 @@
             <div class="flex items-center gap-2.5">
               <span class="text-sm shrink-0">📧</span>
               <span class="text-white/30 text-xs w-14 shrink-0">邮箱</span>
-              <span class="text-white/65 text-xs truncate">your.email@example.com</span>
+              <span class="text-white/65 text-xs truncate">
+                <a href="mailto:2234085452@qq.com" class="hover:text-orange transition-colors">2234085452@qq.com</a>
+              </span>
             </div>
             <div class="flex items-center gap-2.5">
               <span class="text-sm shrink-0">📱</span>
@@ -92,7 +96,7 @@
             <div class="flex items-center gap-2.5">
               <span class="text-sm shrink-0">🟢</span>
               <span class="text-white/30 text-xs w-14 shrink-0">求职状态</span>
-              <span class="text-green-400 text-xs font-medium">应届毕业生 · 求职中</span>
+              <span class="text-green-400 text-xs font-medium">大三在读 · 7月可到岗</span>
             </div>
           </div>
         </div>
@@ -115,9 +119,34 @@
 import { ref } from 'vue'
 
 const form = ref({ name: '', email: '', subject: '', msg: '' })
+const sending = ref(false)
+const sent = ref(false)
 
-const send = () => {
-  alert('感谢您的留言！彭裕佳会尽快回复～')
-  form.value = { name: '', email: '', subject: '', msg: '' }
+const send = async () => {
+  sending.value = true
+  sent.value = false
+  try {
+    const res = await fetch('https://formsubmit.co/ajax/2234085452@qq.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: form.value.name,
+        email: form.value.email,
+        subject: form.value.subject,
+        message: form.value.msg,
+      }),
+    })
+    if (res.ok) {
+      sent.value = true
+      form.value = { name: '', email: '', subject: '', msg: '' }
+      setTimeout(() => { sent.value = false }, 3000)
+    } else {
+      throw new Error('发送失败')
+    }
+  } catch {
+    alert('发送失败，请直接发邮件至 2234085452@qq.com\n或点击右侧邮箱链接用邮件客户端发送。')
+  } finally {
+    sending.value = false
+  }
 }
 </script>

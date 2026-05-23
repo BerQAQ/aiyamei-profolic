@@ -7,7 +7,7 @@
       <div class="flex-1 relative z-10 animate-slide-right">
         <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange/10 border border-orange/20 mb-5">
           <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-          <span class="text-xs text-orange font-medium">应届毕业生 · 求职中</span>
+          <span class="text-xs text-orange font-medium">大三在读 · 7月可到岗</span>
         </div>
 
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-3">
@@ -64,7 +64,7 @@
           </div>
 
           <div class="absolute -bottom-3 -right-3 bg-dark border-2 border-orange rounded-xl px-3 py-1.5 text-xs text-orange font-semibold shadow-lg shadow-orange/15">
-            <span class="inline-block w-1.5 h-1.5 rounded-full bg-green-400 mr-1" /> 可实习
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-green-400 mr-1" /> 7月到岗
           </div>
         </div>
       </div>
@@ -80,7 +80,7 @@
         <div class="text-orange text-lg mb-2">🏫</div>
         <h3 class="font-semibold text-white text-sm mb-1">广州应用科技学院</h3>
         <p class="text-white/40 text-xs">软件工程 · 本科</p>
-        <p class="text-white/30 text-xs mt-1">2022.09 - 2026.06</p>
+        <p class="text-white/30 text-xs mt-1">2023.09 - 2027.06</p>
       </div>
       <div class="glass-card rounded-xl p-5 hover:border-pink/30 transition-all duration-300 hover:translate-y-[-2px]">
         <div class="text-pink text-lg mb-2">📊</div>
